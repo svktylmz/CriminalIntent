@@ -13,6 +13,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import tr.com.hacktusdynamics.android.criminalintent.R;
 import tr.com.hacktusdynamics.android.criminalintent.models.Crime;
 
@@ -50,7 +53,8 @@ public class CrimeFragment extends Fragment{
         });
 
         mDateButton = (Button) rootView.findViewById(R.id.crime_date);
-        mDateButton.setText(mCrime.getDate().toString());
+        DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
+        mDateButton.setText(formatter.format(mCrime.getDate()));
         mDateButton.setEnabled(false);
 
         mSolvedCheckbox = (CheckBox) rootView.findViewById(R.id.crime_solved);
