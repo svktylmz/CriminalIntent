@@ -1,15 +1,19 @@
 package tr.com.hacktusdynamics.android.criminalintent.models;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class Crime {
     private UUID mId;
     private String mTitle;
+    private Date mDate;
+    private boolean mSolved;
 
     //Constructor
     public Crime() {
         //Generate unique identifier
         this.mId = UUID.randomUUID();
+        this.mDate = new Date();
     }
 
     //Getters Setters
@@ -23,6 +27,22 @@ public class Crime {
 
     public UUID getId() {
         return mId;
+    }
+
+    public Date getDate() {
+        return mDate;
+    }
+
+    public void setDate(Date mDate) {
+        this.mDate = mDate;
+    }
+
+    public boolean isSolved() {
+        return mSolved;
+    }
+
+    public void setSolved(boolean mSolved) {
+        this.mSolved = mSolved;
     }
 
 }
