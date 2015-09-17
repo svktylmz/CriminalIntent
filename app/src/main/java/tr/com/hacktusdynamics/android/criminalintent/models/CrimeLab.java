@@ -22,7 +22,7 @@ public class CrimeLab {
         create100DummyCrimes();
     }
 
-    public List<Crime> getmCrimes(){
+    public List<Crime> getCrimes(){
         return mCrimes;
     }
 
