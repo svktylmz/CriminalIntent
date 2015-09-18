@@ -1,5 +1,6 @@
 package tr.com.hacktusdynamics.android.criminalintent.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import tr.com.hacktusdynamics.android.criminalintent.R;
+import tr.com.hacktusdynamics.android.criminalintent.activities.CrimeActivity;
 import tr.com.hacktusdynamics.android.criminalintent.models.Crime;
 import tr.com.hacktusdynamics.android.criminalintent.models.CrimeLab;
 
@@ -68,7 +69,8 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!", Toast.LENGTH_LONG).show();
+            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            startActivity(intent);
         }
     }
 
