@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import tr.com.hacktusdynamics.android.criminalintent.R;
-import tr.com.hacktusdynamics.android.criminalintent.activities.CrimeActivity;
+import tr.com.hacktusdynamics.android.criminalintent.activities.CrimePagerActivity;
 import tr.com.hacktusdynamics.android.criminalintent.models.Crime;
 import tr.com.hacktusdynamics.android.criminalintent.models.CrimeLab;
 
@@ -79,7 +79,7 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(intent);
         }
     }
