@@ -3,6 +3,7 @@ package tr.com.hacktusdynamics.android.criminalintent.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import tr.com.hacktusdynamics.android.criminalintent.models.CrimeLab;
 
 public class CrimeFragment extends Fragment{
     private static final String ARG_CRIME_ID = "crime_id";
+    private static final String DIALOG_DATE = "DialogDate";
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -69,7 +71,14 @@ public class CrimeFragment extends Fragment{
         mDateButton = (Button) rootView.findViewById(R.id.crime_date);
         DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
         mDateButton.setText(formatter.format(mCrime.getDate()));
-        mDateButton.setEnabled(false);
+        mDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getFragmentManager();
+                DatePickerFragment dialog = new DatePickerFragment();
+                dialog.show(manager, DIALOG_DATE);
+            }
+        });
 
         mSolvedCheckbox = (CheckBox) rootView.findViewById(R.id.crime_solved);
         mSolvedCheckbox.setChecked(mCrime.isSolved());
