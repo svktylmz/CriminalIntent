@@ -19,7 +19,7 @@ public class CrimeLab {
 
     private CrimeLab(Context context){
         mCrimes = new ArrayList<>();
-        create100DummyCrimes();
+        //create100DummyCrimes();
     }
 
     public List<Crime> getCrimes(){
@@ -33,6 +33,11 @@ public class CrimeLab {
         return null;
     }
 
+    public void addCrime(Crime c){
+        mCrimes.add(c);
+    }
+
+/*
     private void create100DummyCrimes() {
         for(int i = 0; i < 100; i++){
             Crime crime = new Crime();
@@ -41,4 +46,6 @@ public class CrimeLab {
             mCrimes.add(crime);
         }
     }
+*/
+
 }
