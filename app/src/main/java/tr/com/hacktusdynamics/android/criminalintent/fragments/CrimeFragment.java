@@ -2,6 +2,7 @@ package tr.com.hacktusdynamics.android.criminalintent.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -124,6 +125,10 @@ public class CrimeFragment extends Fragment{
         if(mCrime.getSuspect() != null)
             mSuspectButton.setText(mCrime.getSuspect());
 
+        PackageManager packageManager = getActivity().getPackageManager();
+        if(packageManager.resolveActivity(pickContactIntent, PackageManager.MATCH_DEFAULT_ONLY) == null)
+            mSuspectButton.setEnabled(false);
+
         return rootView;
     }
 
@@ -157,6 +162,7 @@ public class CrimeFragment extends Fragment{
             }finally {
                 cursor.close();
             }
+
         }
 
     }
