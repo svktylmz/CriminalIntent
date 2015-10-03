@@ -2,6 +2,8 @@ package tr.com.hacktusdynamics.android.criminalintent.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
@@ -139,6 +141,22 @@ public class CrimeFragment extends Fragment{
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
+        }else if(requestCode == REQUEST_CONTACT && data != null){
+            Uri contactUri = data.getData();
+            //specify wich fields you want your query to return values for
+            String[] queryFields = new String[]{ ContactsContract.Contacts.DISPLAY_NAME };
+            //perform query - the concatUri is like a where clause here
+            Cursor cursor = getActivity().getContentResolver().query(contactUri, queryFields, null, null, null);
+            try {
+                if(cursor.getCount() == 0)
+                    return;
+                cursor.moveToFirst();
+                String suspect = cursor.getString(0);
+                mCrime.setSuspect(suspect);
+                mSuspectButton.setText(suspect);
+            }finally {
+                cursor.close();
+            }
         }
 
     }
