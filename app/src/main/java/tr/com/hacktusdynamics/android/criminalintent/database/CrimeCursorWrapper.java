@@ -1,0 +1,12 @@
+package tr.com.hacktusdynamics.android.criminalintent.database;
+
+import android.database.Cursor;
+import android.database.CursorWrapper;
+
+public class CrimeCursorWrapper extends CursorWrapper {
+    public CrimeCursorWrapper(Cursor cursor) {
+        super(cursor);
+    }
+
+
+}
