@@ -1,14 +1,20 @@
 package tr.com.hacktusdynamics.android.criminalintent.models;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import tr.com.hacktusdynamics.android.criminalintent.database.CrimeBaseHelper;
+
 public class CrimeLab {
     private static CrimeLab sCrimeLab;
     private List<Crime> mCrimes;
+
+    private Context mContext;
+    private SQLiteDatabase mDataBase;
 
     public static CrimeLab get(Context context){
         if(sCrimeLab == null){
@@ -18,6 +24,8 @@ public class CrimeLab {
     }
 
     private CrimeLab(Context context){
+        mContext = context.getApplicationContext();
+        mDataBase = new CrimeBaseHelper(mContext).getWritableDatabase();
         mCrimes = new ArrayList<>();
         //create100DummyCrimes();
     }
