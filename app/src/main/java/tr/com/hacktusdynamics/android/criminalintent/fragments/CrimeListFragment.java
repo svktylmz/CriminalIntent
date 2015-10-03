@@ -24,6 +24,7 @@ import tr.com.hacktusdynamics.android.criminalintent.models.Crime;
 import tr.com.hacktusdynamics.android.criminalintent.models.CrimeLab;
 
 public class CrimeListFragment extends Fragment {
+    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mCrimeAdapter;
     private boolean mSubtitleVisible;
@@ -42,6 +43,10 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView = (RecyclerView) rotView.findViewById(R.id.crime_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        if(savedInstanceState != null){
+            mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
+        }
+
         updateUI();
 
         return rotView;
@@ -51,6 +56,12 @@ public class CrimeListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         updateUI();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
     }
 
     @Override
@@ -102,6 +113,8 @@ public class CrimeListFragment extends Fragment {
         }else{
             mCrimeAdapter.notifyDataSetChanged();
         }
+
+        updateSubtitle();
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
