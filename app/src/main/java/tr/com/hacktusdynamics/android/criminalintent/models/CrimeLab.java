@@ -2,6 +2,7 @@ package tr.com.hacktusdynamics.android.criminalintent.models;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
@@ -58,9 +59,21 @@ public class CrimeLab {
         ContentValues values = getContentValues(c);
         mDataBase.update(CrimeTable.NAME, values,
                 CrimeTable.Cols.UUID + " = ?",
-                new String[] {uuidString});
+                new String[]{uuidString});
     }
 
+    private Cursor queryCrimes(String whereClause, String[] whereArgs){
+        Cursor cursor = mDataBase.query(
+                CrimeTable.NAME,
+                null, //null select all columns
+                whereClause,
+                whereArgs,
+                null, //group by
+                null, //having
+                null //order by
+        );
+        return cursor;
+    }
 /*
     private void create100DummyCrimes() {
         for(int i = 0; i < 100; i++){
