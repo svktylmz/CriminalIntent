@@ -34,6 +34,7 @@ public class CrimeFragment extends Fragment{
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckbox;
+    private Button mReportButton;
 
     public static CrimeFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
@@ -91,6 +92,18 @@ public class CrimeFragment extends Fragment{
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 //set the Crime's solved property
                 mCrime.setSolved(isChecked);
+            }
+        });
+
+        mReportButton = (Button) rootView.findViewById(R.id.crime_report);
+        mReportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, getCrimeReport());
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.crime_report_subject));
+                startActivity(intent);
             }
         });
 
