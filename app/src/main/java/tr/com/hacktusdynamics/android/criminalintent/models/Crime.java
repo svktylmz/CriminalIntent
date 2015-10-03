@@ -12,8 +12,12 @@ public class Crime {
     //Constructor
     public Crime() {
         //Generate unique identifier
-        this.mId = UUID.randomUUID();
-        this.mDate = new Date();
+        this(UUID.randomUUID());
+    }
+
+    public Crime(UUID id){
+        mId = id;
+        mDate = new Date();
     }
 
     //Getters Setters
