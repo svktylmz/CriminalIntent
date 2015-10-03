@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 import tr.com.hacktusdynamics.android.criminalintent.database.CrimeBaseHelper;
+import tr.com.hacktusdynamics.android.criminalintent.database.CrimeCursorWrapper;
 import tr.com.hacktusdynamics.android.criminalintent.database.CrimeDbSchema.CrimeTable;
 
 public class CrimeLab {
@@ -62,7 +63,7 @@ public class CrimeLab {
                 new String[]{uuidString});
     }
 
-    private Cursor queryCrimes(String whereClause, String[] whereArgs){
+    private CrimeCursorWrapper queryCrimes(String whereClause, String[] whereArgs){
         Cursor cursor = mDataBase.query(
                 CrimeTable.NAME,
                 null, //null select all columns
@@ -72,7 +73,7 @@ public class CrimeLab {
                 null, //having
                 null //order by
         );
-        return cursor;
+        return new CrimeCursorWrapper(cursor);
     }
 /*
     private void create100DummyCrimes() {
