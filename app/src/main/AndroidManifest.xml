@@ -3,6 +3,7 @@
     package="tr.com.hacktusdynamics.android.criminalintent" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
     
     <application
         android:allowBackup="true"
