@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -32,6 +33,7 @@ import java.util.UUID;
 import tr.com.hacktusdynamics.android.criminalintent.R;
 import tr.com.hacktusdynamics.android.criminalintent.models.Crime;
 import tr.com.hacktusdynamics.android.criminalintent.models.CrimeLab;
+import tr.com.hacktusdynamics.android.criminalintent.utils.PictureUtils;
 
 public class CrimeFragment extends Fragment{
     private static final String ARG_CRIME_ID = "crime_id";
@@ -154,6 +156,7 @@ public class CrimeFragment extends Fragment{
         });
 
         mPhotoView= (ImageView) rootView.findViewById(R.id.crime_photo);
+        updatePhotoView();
 
         return rootView;
     }
@@ -189,6 +192,8 @@ public class CrimeFragment extends Fragment{
                 cursor.close();
             }
 
+        }else if(requestCode == REQUEST_PHOTO){
+            updatePhotoView();
         }
 
     }
@@ -221,5 +226,14 @@ public class CrimeFragment extends Fragment{
                 suspect);
 
         return report;
+    }
+
+    private void updatePhotoView(){
+        if(mPhotoFile == null || !mPhotoFile.exists()){
+            mPhotoView.setImageDrawable(null);
+        }else {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            mPhotoView.setImageBitmap(bitmap);
+        }
     }
 }
